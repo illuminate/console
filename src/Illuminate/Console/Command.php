@@ -1,6 +1,8 @@
 <?php namespace Illuminate\Console;
 
 use Symfony\Component\Console\Input\ArrayInput;
+use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Output\OutputInterface;
 
 class Command extends \Symfony\Component\Console\Command\Command {
 
@@ -52,7 +54,7 @@ class Command extends \Symfony\Component\Console\Command\Command {
 	{
 		$instance = $this->getApplication()->find($command);
 
-		return $instance->run(new ArrayInput($arguments), $output);
+		return $instance->run(new ArrayInput($arguments), $this->output);
 	}
 
 	/**
