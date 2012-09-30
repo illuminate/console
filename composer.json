@@ -1,0 +1,23 @@
+{
+    "name": "illuminate/console",
+    "keywords": ["laravel"],
+    "authors": [
+        {
+            "name": "Taylor Otwell",
+            "email": "taylorotwell@gmail.com"
+        }
+    ],
+    "require": {
+        "illuminate/container": ">=1.0.0",
+        "symfony/console": "2.1.*"
+    },
+    "require-dev": {
+        "mockery/mockery": "0.7.2"
+    },
+    "autoload": {
+        "psr-0": {
+            "Illuminate\\Console": "src/"
+        }
+    },
+    "minimum-stability": "dev"
+}
