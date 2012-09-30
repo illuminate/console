@@ -1,7 +1,7 @@
 <?php namespace Illuminate\Console;
 
 use Illuminate\Container;
-use Symfony\Component\Console\Command\Command;
+use Symfony\Component\Console\Command\Command as SymfonyCommand;
 
 class Application extends \Symfony\Component\Console\Application {
 
@@ -18,9 +18,12 @@ class Application extends \Symfony\Component\Console\Application {
 	 * @param  Symfony\Component\Console\Command\Command  $command
 	 * @return Symfony\Component\Console\Command\Command
 	 */
-	public function add(Command $command)
+	public function add(SymfonyCommand $command)
 	{
-		$command->setLaravel($this->laravel);
+		if ($command instanceof Command)
+		{
+			$command->setLaravel($this->laravel);
+		}
 
 		parent::add($command);
 	}
