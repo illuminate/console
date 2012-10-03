@@ -28,6 +28,55 @@ class Command extends \Symfony\Component\Console\Command\Command {
 	protected $output;
 
 	/**
+	 * The console command name.
+	 *
+	 * @var string
+	 */
+	protected $name;
+
+	/**
+	 * The console command description.
+	 *
+	 * @var string
+	 */
+	protected $description;
+
+	/**
+	 * Create a new console command instance.
+	 *
+	 * @return void
+	 */
+	public function __construct()
+	{
+		$this->setName($this->name);
+
+		$this->setDescription($this->description);
+
+		$this->specifyParameters();
+	}
+
+	/**
+	 * Specify the arguments and options on the command.
+	 *
+	 * @return void
+	 */
+	protected function specifyParameters()
+	{
+		// We will loop through all of the arguments and options for the command and
+		// set them all on the base command instance. This specifies what can get
+		// passed into these commands as "parameters" to control the execution.
+		foreach ($this->getArguments() as $arguments)
+		{
+			call_user_func_array(array($this, 'addArgument'), $arguments);
+		}
+
+		foreach ($this->getOptions() as $options)
+		{
+			call_user_func_array(array($this, 'addOption'), $options);
+		}
+	}
+
+	/**
 	 * Run the conosle command.
 	 *
 	 * @param  Symfony\Component\Console\Input\InputInterface  $input
@@ -55,6 +104,98 @@ class Command extends \Symfony\Component\Console\Command\Command {
 		$instance = $this->getApplication()->find($command);
 
 		return $instance->run(new ArrayInput($arguments), $this->output);
+	}
+
+	/**
+	 * Confirm a question with the user.
+	 *
+	 * @param  string  $question
+	 * @param  bool    $default
+	 * @return bool
+	 */
+	protected function confirm($question, $default = true)
+	{
+		$dialog = $this->getHelperSet()->get('dialog');
+
+		return $dialog->askConfirmation($this->output, "<question>$question</question>", $default);
+	}
+
+	/**
+	 * Prompt the user for input.
+	 *
+	 * @param  string  $question
+	 * @param  string  $default
+	 * @return string
+	 */
+	protected function ask($question, $default = null)
+	{
+		$dialog = $this->getHelperSet()->get('dialog');
+
+		return $dialog->ask($this->output, "<question>$question</question>", $default);
+	}
+
+	/**
+	 * Write a string as information output.
+	 *
+	 * @param  string  $string
+	 * @return void
+	 */
+	protected function info($string)
+	{
+		$this->output->writeln("<info>$string</info>");
+	}
+
+	/**
+	 * Write a string as comment output.
+	 *
+	 * @param  string  $string
+	 * @return void
+	 */
+	protected function comment($string)
+	{
+		$this->output->writeln("<comment>$string</comment>");
+	}
+
+	/**
+	 * Write a string as question output.
+	 *
+	 * @param  string  $string
+	 * @return void
+	 */
+	protected function question($string)
+	{
+		$this->output->writeln("<question>$string</question>");
+	}
+
+	/**
+	 * Write a string as error output.
+	 *
+	 * @param  string  $string
+	 * @return void
+	 */
+	protected function error($string)
+	{
+		$this->output->writeln("<error>$string</error>");
+	}
+
+	/**
+	 * Get the console command arguments.
+	 *
+	 * @return array
+	 */
+	protected function getArguments()
+	{
+		return array();
+	}
+
+	/**
+	 * Get the console command options.
+	 *
+	 * @return array
+	 */
+	protected function getOptinos()
+	{
+		return array();
 	}
 
 	/**
