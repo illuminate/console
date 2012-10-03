@@ -13,6 +13,17 @@ class Application extends \Symfony\Component\Console\Application {
 	protected $laravel;
 
 	/**
+	 * Start a new Console application.
+	 *
+	 * @param  Illuminate\Foundation\Application  $app
+	 * @return Illuminate\Console\Application
+	 */
+	public static function start($app)
+	{
+		return require __DIR__.'/../../start.php';
+	}
+
+	/**
 	 * Add a command to the console.
 	 *
 	 * @param  Symfony\Component\Console\Command\Command  $command
