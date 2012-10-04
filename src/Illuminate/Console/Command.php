@@ -93,6 +93,18 @@ class Command extends \Symfony\Component\Console\Command\Command {
 	}
 
 	/**
+	 * Execute the conosle command.
+	 *
+	 * @param  Symfony\Component\Console\Input\InputInterface  $input
+	 * @param  Symfony\Component\Console\Output\OutputInterface  $output
+	 * @return mixed
+	 */
+	protected function execute(InputInterface $input, OutputInterface $output)
+	{
+		return $this->fire();
+	}
+
+	/**
 	 * Call another console command.
 	 *
 	 * @param  string  $command
@@ -193,7 +205,7 @@ class Command extends \Symfony\Component\Console\Command\Command {
 	 *
 	 * @return array
 	 */
-	protected function getOptinos()
+	protected function getOptions()
 	{
 		return array();
 	}
