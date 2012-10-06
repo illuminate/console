@@ -47,4 +47,20 @@ class ApplicationTest extends PHPUnit_Framework_TestCase {
 		$this->assertEquals($command, $result);
 	}
 
+
+	public function testResolveCommandsCallsResolveForAllCommandsItsGiven()
+	{
+		$app = m::mock('Illuminate\Console\Application[resolve]');
+		$app->shouldReceive('resolve')->twice()->with('foo');
+		$app->resolveCommands('foo', 'foo');
+	}
+
+
+	public function testResolveCommandsCallsResolveForAllCommandsItsGivenViaArray()
+	{
+		$app = m::mock('Illuminate\Console\Application[resolve]');
+		$app->shouldReceive('resolve')->twice()->with('foo');
+		$app->resolveCommands(array('foo', 'foo'));
+	}
+
 }
