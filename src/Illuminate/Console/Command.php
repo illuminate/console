@@ -48,13 +48,11 @@ class Command extends \Symfony\Component\Console\Command\Command {
 	 */
 	public function __construct()
 	{
-		parent::__construct();
+		parent::__construct($this->name);
 
 		// We will go ahead and set the name, description, and parameters on console
 		// commands just to make things a little easier on the developer. This is
 		// so they don't have to all be manually specified in the constructors.
-		$this->setName($this->name);
-
 		$this->setDescription($this->description);
 
 		$this->specifyParameters();
