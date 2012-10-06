@@ -36,7 +36,18 @@ class Application extends \Symfony\Component\Console\Application {
 			$command->setLaravel($this->laravel);
 		}
 
-		parent::add($command);
+		return $this->addToParent($command);
+	}
+
+	/**
+	 * Add the command to the parent instance.
+	 *
+	 * @param  Symfony\Component\Console\Command  $command
+	 * @return Symfony\Component\Console\Command
+	 */
+	protected function addToParent($command)
+	{
+		return parent::add($command);
 	}
 
 	/**
@@ -48,6 +59,22 @@ class Application extends \Symfony\Component\Console\Application {
 	public function resolve($command)
 	{
 		return $this->add($this->laravel[$command]);
+	}
+
+	/**
+	 * Resolve an array of commands through the application.
+	 *
+	 * @param  array|dynamic  $commands
+	 * @return void
+	 */
+	public function resolveCommands($commands)
+	{
+		$commands = is_array($commands) ? $commands : func_get_args();
+
+		foreach ($commands as $command)
+		{
+			$this->resolve($command);
+		}
 	}
 
 	/**
