@@ -40,35 +40,14 @@ class Application extends \Symfony\Component\Console\Application {
 	}
 
 	/**
-	 * Add a command, resolving through the container.
+	 * Add a command, resolving through the application.
 	 *
 	 * @param  string  $command
 	 * @return void
 	 */
 	public function resolve($command)
 	{
-		return $this->add($this->container->resolve($command));
-	}
-
-	/**
-	 * Get the IoC container instance.
-	 *
-	 * @return Illuminate\Container
-	 */
-	public function getContainer()
-	{
-		return $this->container;
-	}
-
-	/**
-	 * Set the IoC container instance.
-	 *
-	 * @param  Illuminate\Container  $container
-	 * @return void
-	 */
-	public function setContainer(Container $container)
-	{
-		$this->container = $container;
+		return $this->add($this->laravel[$command]);
 	}
 
 	/**
