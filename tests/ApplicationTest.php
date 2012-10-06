@@ -35,4 +35,16 @@ class ApplicationTest extends PHPUnit_Framework_TestCase {
 		$this->assertEquals($command, $result);
 	}
 
+
+	public function testResolveAddsCommandViaApplicationResolution()
+	{
+		$app = $this->getMock('Illuminate\Console\Application', array('addToParent'));
+		$command = m::mock('Symfony\Component\Console\Command\Command');
+		$app->setLaravel(array('foo' => $command));
+		$app->expects($this->once())->method('addToParent')->with($this->equalTo($command))->will($this->returnValue($command));
+		$result = $app->resolve('foo');
+
+		$this->assertEquals($command, $result);
+	}
+
 }
