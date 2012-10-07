@@ -41,11 +41,11 @@ $artisan->setLaravel($app);
 
 $artisan->resolveCommands(array(
 
-	'commands.migrate',
-	'commands.migrate.make',
-	'commands.migrate.install',
-	'commands.migrate.rollback',
-	'commands.migrate.reset',
+	'command.migrate',
+	'command.migrate.make',
+	'command.migrate.install',
+	'command.migrate.rollback',
+	'command.migrate.reset',
 
 ));
 
