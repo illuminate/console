@@ -30,6 +30,27 @@ $artisan->setLaravel($app);
 
 /*
 |--------------------------------------------------------------------------
+| Register The Default Commands
+|--------------------------------------------------------------------------
+|
+| Here we will register the default commands used by the framework which
+| includes all of the migration related commands. After these we will
+| be ready to run the start file so the developer can do their own.
+|
+*/
+
+$artisan->resolveCommands(array(
+
+	'commands.migrate',
+	'commands.migrate.make',
+	'commands.migrate.install',
+	'commands.migrate.rollback',
+	'commands.migrate.reset',
+
+));
+
+/*
+|--------------------------------------------------------------------------
 | Register The Artisan Commands
 |--------------------------------------------------------------------------
 |
