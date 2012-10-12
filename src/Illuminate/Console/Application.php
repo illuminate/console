@@ -1,6 +1,7 @@
 <?php namespace Illuminate\Console;
 
 use Illuminate\Container;
+use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Command\Command as SymfonyCommand;
 
 class Application extends \Symfony\Component\Console\Application {
@@ -75,6 +76,22 @@ class Application extends \Symfony\Component\Console\Application {
 		{
 			$this->resolve($command);
 		}
+	}
+
+	/**
+	 * Get the default input definitions for the applications.
+	 *
+	 * @return Symfony\Component\Console\Input\InputDefinition
+	 */
+	protected function getDefaultInputDefinition()
+	{
+		$definition = parent::getDefaultInputDefinition();
+
+		$message = 'The environment the command should run under.';
+
+		$definition->addOption(new InputOption('--env', null, InputOption::VALUE_OPTIONAL, $message));
+
+		return $definition;
 	}
 
 	/**
