@@ -46,6 +46,7 @@ $artisan->resolveCommands(array(
 	'command.migrate.install',
 	'command.migrate.rollback',
 	'command.migrate.reset',
+	'command.controller.make',
 
 ));
 
