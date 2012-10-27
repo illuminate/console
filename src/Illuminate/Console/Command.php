@@ -214,6 +214,16 @@ class Command extends \Symfony\Component\Console\Command\Command {
 	}
 
 	/**
+	 * Get the output implementation.
+	 *
+	 * @return Symfony\Component\Console\Output\OutputInterface
+	 */
+	public function getOutput()
+	{
+		return $this->output;
+	}
+
+	/**
 	 * Set the Laravel application instance.
 	 *
 	 * @return Illuminate\Foundation\Application
