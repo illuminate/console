@@ -43,6 +43,7 @@ $app->instance('artisan', $artisan);
 
 $artisan->resolveCommands(array(
 
+	'command.seed',
 	'command.migrate',
 	'command.migrate.make',
 	'command.migrate.install',
