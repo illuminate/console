@@ -21,7 +21,17 @@ class Application extends \Symfony\Component\Console\Application {
 	 */
 	public static function start($app)
 	{
-		return require __DIR__.'/../../start.php';
+		$artisan = require __DIR__.'/../../start.php';
+
+		// If the event dispatcher is set on the application, we will fire an event
+		// with the Artisan instance to provide each listener the opportunity to
+		// register their commands on this application before it gets started.
+		if (isset($app['events']))
+		{
+			$app['events']->fire('artisan.start', array($artisan));
+		}
+
+		return $artisan;
 	}
 
 	/**
