@@ -118,6 +118,8 @@ class Command extends \Symfony\Component\Console\Command\Command {
 	{
 		$instance = $this->getApplication()->find($command);
 
+		$arguments['command'] = $command;
+
 		return $instance->run(new ArrayInput($arguments), $this->output);
 	}
 
