@@ -28,8 +28,6 @@ $artisan = new Application('Laravel Framework', LARAVEL_VERSION);
 
 $artisan->setLaravel($app);
 
-$app->instance('artisan', $artisan);
-
 /*
 |--------------------------------------------------------------------------
 | Register The Default Commands
