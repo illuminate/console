@@ -50,6 +50,7 @@ $artisan->resolveCommands(array(
 	'command.migrate.rollback',
 	'command.migrate.reset',
 	'command.controller.make',
+	'command.package.publish',
 
 ));
 
