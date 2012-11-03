@@ -152,6 +152,17 @@ class Command extends \Symfony\Component\Console\Command\Command {
 	}
 
 	/**
+	 * Write a string as standard output.
+	 *
+	 * @param  string  $string
+	 * @return void
+	 */
+	protected function line($string)
+	{
+		$this->output->writeln($string);
+	}
+
+	/**
 	 * Write a string as information output.
 	 *
 	 * @param  string  $string
