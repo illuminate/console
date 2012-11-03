@@ -157,7 +157,7 @@ class Command extends \Symfony\Component\Console\Command\Command {
 	 * @param  string  $string
 	 * @return void
 	 */
-	protected function write($string)
+	protected function line($string)
 	{
 		$this->output->writeln($string);
 	}
