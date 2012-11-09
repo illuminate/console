@@ -17,6 +17,19 @@ $artisan = new Application('Laravel Framework', LARAVEL_VERSION);
 
 /*
 |--------------------------------------------------------------------------
+| Set The Laravel Exception Handler
+|--------------------------------------------------------------------------
+|
+| We'll go ahead and set the Laravel exception handler so the console can
+| call these handler when an exception is thrown from the CLI. This is
+| important since there could be loggers, etc. setup for exceptions.
+|
+*/
+
+$artisan->setExceptionHandler($app['exception']);
+
+/*
+|--------------------------------------------------------------------------
 | Set The Laravel Application
 |--------------------------------------------------------------------------
 |
