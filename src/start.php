@@ -60,6 +60,7 @@ $artisan->resolveCommands(array(
 	'command.migrate.install',
 	'command.migrate.rollback',
 	'command.migrate.reset',
+	'command.migrate.refresh',
 	'command.controller.make',
 	'command.package.publish',
 
