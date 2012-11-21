@@ -62,7 +62,7 @@ $artisan->resolveCommands(array(
 	'command.migrate.reset',
 	'command.migrate.refresh',
 	'command.controller.make',
-	'command.package.publish',
+	'command.asset.publish',
 
 ));
 
