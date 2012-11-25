@@ -104,11 +104,21 @@ class Application extends \Symfony\Component\Console\Application {
 	{
 		$definition = parent::getDefaultInputDefinition();
 
-		$message = 'The environment the command should run under.';
-
-		$definition->addOption(new InputOption('--env', null, InputOption::VALUE_OPTIONAL, $message));
+		$definition->addOption($this->getEnvironmentOption());
 
 		return $definition;
+	}
+
+	/**
+	 * Get the global environment option for the definition.
+	 *
+	 * @return Symfony\Component\Console\Input\InputOption
+	 */
+	protected function getEnvironmentOption()
+	{
+		$message = 'The environment the command should run under.';
+
+		return new InputOption('--env', null, InputOption::VALUE_OPTIONAL, $message);
 	}
 
 	/**
