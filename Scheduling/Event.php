@@ -573,6 +573,64 @@ class Event
     }
 
     /**
+     * Set Working period
+     *
+     * @param  string $from
+     * @param  string $to
+     * @return $this
+     */
+    public function between($from, $to)
+    {
+        return $this->from($from)
+                    ->to($to);
+    }
+
+    /**
+     * Check if event should be on
+     *
+     * @param  string  $datetime
+     * @return $this
+     */
+     public function from($datetime)
+     {
+        return $this->skip(function() use ($datetime) {
+            return $this->timeToCome($datetime);
+        });
+     }
+     /**
+     * Check if event should be off
+     *
+     * @param  string $datetime
+     * @return $this
+     */
+     public function to($datetime)
+     {
+        return $this->skip(function() use ($datetime) {
+            return $this->timeHasCome($datetime);
+        });
+     }
+    /**
+     * assert that the time hasn't come yet
+     *
+     * @param  string  $time
+     * @return boolean
+     */
+     protected function timeToCome($datetime)
+     {
+        return time() < strtotime($datetime);
+     }
+    /**
+     * Assert that the time has passed
+     *
+     * @param  string $time
+     * @return boolean
+     */
+     protected function timeHasCome($datetime)
+     {
+        return time() > strtotime($datetime);
+     }
+
+    /**
      * Set the timezone the date should be evaluated on.
      *
      * @param  \DateTimeZone|string  $timezone
