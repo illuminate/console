@@ -343,11 +343,12 @@ class Command extends SymfonyCommand
      *
      * @param  string  $question
      * @param  bool    $fallback
+     * @param  string  $default
      * @return string
      */
-    public function secret($question, $fallback = true)
+    public function secret($question, $fallback = true, $default = null)
     {
-        $question = new Question($question);
+        $question = new Question($question, $default);
 
         $question->setHidden(true)->setHiddenFallback($fallback);
 
