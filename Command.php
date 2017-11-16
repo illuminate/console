@@ -10,6 +10,7 @@ use Symfony\Component\Console\Question\Question;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Question\ChoiceQuestion;
+use Symfony\Component\Console\Exception\LogicException;
 use Symfony\Component\Console\Formatter\OutputFormatterStyle;
 use Symfony\Component\Console\Command\Command as SymfonyCommand;
 
@@ -343,14 +344,24 @@ class Command extends SymfonyCommand
      *
      * @param  string  $question
      * @param  bool    $fallback
-     * @param  string  $default
+     * @param  bool    $optional
      * @return string
      */
-    public function secret($question, $fallback = true, $default = null)
+    public function secret($question, $fallback = true, $optional = false)
     {
-        $question = new Question($question, $default);
+        $question = new Question($question);
 
-        $question->setHidden(true)->setHiddenFallback($fallback);
+        $validator = function ($value) use ($optional) {
+            if (! $optional) {
+                if (!is_array($value) && !is_bool($value) && 0 === strlen($value)) {
+                    throw new LogicException('A value is required.');
+                }
+            }
+
+            return $value;
+        };
+
+        $question->setValidator($validator)->setHidden(true)->setHiddenFallback($fallback);
 
         return $this->output->askQuestion($question);
     }
