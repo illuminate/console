@@ -242,18 +242,25 @@ class Command extends SymfonyCommand
     }
 
     /**
-     * Get the value of a command argument.
+     * Get the value of a command argument, if empty, it will return the default parameter.
      *
      * @param  string|null  $key
+     * @param  string|null  $default
      * @return string|array
      */
-    public function argument($key = null)
+    public function argument($key = null, $default = null)
     {
         if (is_null($key)) {
             return $this->input->getArguments();
         }
 
-        return $this->input->getArgument($key);
+        $argumentValue = $this->input->getArgument($key);
+
+        if (empty($argumentValue)) {
+            return $default;
+        }
+
+        return $argumentValue;
     }
 
     /**
